@@ -39,7 +39,7 @@ const Navbar = () => {
                 </div>
             ):(
                 <div>
-                    <Button component={Link} to="/auth" variant='contained' color='primary'>Sign In</Button>
+                  
                 </div>
             )}
         </Toolbar>
