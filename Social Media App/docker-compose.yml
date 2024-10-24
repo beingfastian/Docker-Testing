@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  # Backend (Server) Service
+  server:
+    build:
+      context: ./server  # Path to server directory
+      dockerfile: Dockerfile  # Dockerfile for the server
+    container_name: backend-server
+    volumes:
+      - ./server:/app  # Bind mount for live reload
+      - /app/node_modules  # Ensure node_modules is not overwritten
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+    command: nodemon server.js
+
+  # Frontend (Client) Service
+  client:
+    build:
+      context: ./client/app  # Path to client directory, including app subfolder
+      dockerfile: Dockerfile  # Dockerfile for the client
+    container_name: frontend-client
+    volumes:
+      - ./client/app:/app  # Bind mount for live reload
+      - /app/node_modules  # Ensure node_modules is not overwritten
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
